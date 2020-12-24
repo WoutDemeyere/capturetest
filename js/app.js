@@ -4,6 +4,36 @@ var webcamElement, canvasElement, webcamSelection;
 
 var webcamList = [];
 
+
+
+
+const listenToVideo = function () {
+    navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+        })
+        .then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+            listenToVideo();
+        })
+        .catch(function (err) {
+            console.error("An error occurred: " + err);
+        });
+
+    video.addEventListener('canplay', function (ev) {
+        if (!streaming) {
+            height = video.videoHeight / (video.videoWidth / width);
+
+            video.setAttribute('width', width);
+            video.setAttribute('height', height);
+            canvas.setAttribute('width', width);
+            canvas.setAttribute('height', height);
+            streaming = true;
+        }
+    }, false);
+}
+
 const listenToCam = function () {
     webcam.start()
         .then(result => {
@@ -14,16 +44,16 @@ const listenToCam = function () {
         });
 }
 
-const listenToCamLoad = function() {
+const listenToCamLoad = function () {
     loadCamButton.addEventListener('click', displayPhotobooth)
 }
 
-const displayPhotobooth = function() {
-    
+const displayPhotobooth = function () {
+
 }
 
-const listenToSelection = function() {
-    webcamSelection.addEventListener('change', function() {
+const listenToSelection = function () {
+    webcamSelection.addEventListener('change', function () {
         webcam._selectedDeviceId = webcamSelection.value;
         console.log(webcam._selectedDeviceId)
         webcam.start();
@@ -33,7 +63,7 @@ const listenToSelection = function() {
 const loadOptions = function () {
     var htmlString = ''
     webcamList.forEach(cam => {
-        htmlString += `<option class="js-cam-opt" value="${cam.deviceId}" id="${cam.deviceId}">${cam.label}</option>`    
+        htmlString += `<option class="js-cam-opt" value="${cam.deviceId}" id="${cam.deviceId}">${cam.label}</option>`
     });
 
     webcamSelection.innerHTML = htmlString;
@@ -55,7 +85,7 @@ const loadCameras = function () {
     }
 }
 
-const getDOMElements = function() {
+const getDOMElements = function () {
     webcamElement = document.getElementById('webcam');
     canvasElement = document.getElementById('canvas');
     // webcam = new Webcam(webcamElement, 'user', canvasElement, null);
@@ -69,5 +99,6 @@ const getDOMElements = function() {
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Script loaded');
     getDOMElements();
+    listenToVideo();
     loadCameras();
 });
