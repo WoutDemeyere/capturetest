@@ -19,11 +19,11 @@ const listenToSubmit = function () {
     messageButton.addEventListener('click', function () {
         var json = {
             "name": "nothing",
-            "dialog": textarea.value
+            "dialog": messageInput.value
         };
         console.log(json);
         postMessage(json);
-        textarea.value = "";
+        messageInput.value = "";
     });
 }
 
@@ -43,7 +43,7 @@ const postMessage = function(data) {
 
 const listenToIcons = function () {
     fireworkButton.addEventListener('click', sendFireworks);
-    beerButton.addEventListener('click', sendbeer);
+    beerButton.addEventListener('click', sendBeer);
     cavaButton.addEventListener('click', sendCava);
     wineButton.addEventListener('click', sendWine);
 }
@@ -105,4 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Script loaded!');
     getDOMElements();
     listenToLoadCam();
+    listenToSubmit();
+    listenToIcons();
 });

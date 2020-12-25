@@ -23,7 +23,8 @@ const startWebcam = function () {
             listenToSnap();
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
+            alert("Without acces to the camera you won't be able to upload photos to the photobooth")
         });
 
 

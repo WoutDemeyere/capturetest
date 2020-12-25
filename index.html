@@ -20,8 +20,8 @@
         <div class="o-container">
             <div class="js-global-container">
                 <div class="c-stream-container ">
-                    <h1 class="c-stream__header u-mb-sm">Welcome to krak nye live</h1>
-                    <div class="c-content-container">
+                    <!-- <h1 class="c-stream__header u-mb-sm">Welcome to krak nye live</h1> -->
+                    <div class="c-content-container u-mb-lg">
                         <!-- <iframe class="c-stream__content" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe> -->
                         <div class="c-stream__content"></div>
                     </div>
@@ -454,7 +454,6 @@
                                     </g>
                                 </svg>
                             </button>
-
                         </div>
 
                         <div class="c-textinput-container">
@@ -467,7 +466,13 @@
 
                 <div class="c-pb-container">
                     <div class="c-pb__header">
-                        <p class="c-pb__header-title">NYE PHOTOBOOTH</p>
+
+                        <div class="c-pb__header--img-container">
+                            <img class="c-pb__header--img-title u-mb-md" src="img/photobooth.png" alt="photobooth text">
+                            <img src="img/picture.png" alt="send a picture of your nye" class="c-pb__header--img-footer">
+                        </div>
+                      
+                        <!-- <p class="c-pb__header-title">NYE PHOTOBOOTH</p> -->
                         <div class="c-pb__buttons">
                             <button class="o-button-reset c-icon-field c-icon-field--cam">
                                 <svg class="c-icon-cam" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -579,7 +584,8 @@
                                 </svg>
                             </button>
                         </div>
-                        
+
+
                     </div>
 
                     <div class="c-pb__wall">
@@ -795,9 +801,9 @@
         <div class="o-container-overlay c-cam-overlay-hide  js-overlay">
             <div class="c-cam-overlay ">
                 <button class="o-button-reset c-icon-field c-icon-field--overlay-cancel js-cam-cancel">
-                    <svg class="c-icon-cam__overlay--cancel" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 492 492"
-                        style="enable-background:new 0 0 492 492;" xml:space="preserve">
+                    <svg class="c-icon-cam__overlay--cancel" version="1.1" id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 492 492" style="enable-background:new 0 0 492 492;" xml:space="preserve">
                         <g>
                             <g>
                                 <path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
@@ -848,7 +854,7 @@
                         <video id="webcam" class="js-webcam c-webcam c-video" autoplay playsinline></video>
                         <canvas id="canvas" class="js-canvas c-canvas" class="d-none"></canvas>
                     </div>
-                    
+
                 </div>
 
                 <div class="c-cam-options">
@@ -913,9 +919,10 @@
                             </svg>
                         </button>
                         <button class="o-button-reset c-icon-field c-icon-field--overlay c-refresh-btn js-cam-refresh">
-                            <svg class="c-icon-cam__overlay" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                                style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                            <svg class="c-icon-cam__overlay" version="1.1" id="Capa_1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                                xml:space="preserve">
                                 <g>
                                     <g>
                                         <path d="M493.815,70.629c-11.001-1.003-20.73,7.102-21.733,18.102l-2.65,29.069C424.473,47.194,346.429,0,256,0
@@ -965,7 +972,7 @@
                                 <g>
                                 </g>
                             </svg>
-                        </button> 
+                        </button>
                     </div>
 
                     <button class="o-button-reset c-send-button-cam">SEND</button>
@@ -973,6 +980,8 @@
                 </div>
             </div>
         </div>
+
+
     </main>
 </body>
 
