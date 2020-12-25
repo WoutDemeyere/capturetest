@@ -88,7 +88,6 @@
         --global-icon-cam-width: calc(var(--global-baseline) * 6);
         --global-iconfield-width: calc(var(--global-baseline) * 10);
         --pw-image-height: 50vh;
-
     }
 }
 
@@ -533,27 +532,28 @@ input:disabled {
 
 .c-int-container {
     width: 100%;
-    height: 90px;
+    height: 110px;
     border-radius: 5px;
     border: var(--global-stream-borderWidth) solid #FFF;
     background-color: var(--global-card-backgroundColor);
     padding: var(--global-whitespace-sm);
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
 }
+
+
 
 /*
     Component: Icons
 */
 
 .c-icons-container {
-    width: 40%;
-    height: 100%;
+    margin: var(--global-whitespace-sm);
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -620,10 +620,11 @@ input:disabled {
 */
 
 .c-textinput-container {
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: var(--global-whitespace-sm);
 }
 
 .c-input {
@@ -631,7 +632,7 @@ input:disabled {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 75%;
+    width: 65%;
     border-radius: var(--input-borderRadius);
     border: var(--input-borderWidth) solid var(--input-borderColor, var(--global-input-borderColor));
     background-color: var(--input-backgroundColor);
@@ -659,10 +660,10 @@ input:disabled {
     border: 1px solid var(--button-borderColor);
     background-color: var(--button-backgroundColor);
     /* color: #fff; */
-    padding: calc(var(--global-baseline)*0.8) calc(var(--global-baseline)*2.5);
+    padding: calc(var(--global-baseline)*0.8) calc(var(--global-baseline));
     line-height: calc(var(--global-baseline) * 2);
-    width: 20%;
-    margin: 0 calc(var(--global-stream-borderWidth) * 2);
+    width: 25%;
+    margin: 0 calc(var(--global-whitespace-lg));
     outline: none;
     /* box-shadow: var(--button-boxShadow, 0);
     transition: all var(--global-transitionDuration-alpha) var(--global-transitionEasing-out); */
@@ -672,6 +673,37 @@ input:disabled {
     background-color: var(--button-backgroundColor-hover);
 
 }
+
+@media (min-width: 768px) {
+    .c-int-container {
+        height: 90px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .c-icons-container {
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .c-textinput-container { 
+        width: 60%;
+    }
+
+    .c-input {
+        width: 75%;
+    }
+
+    .c-send-button {
+        width: 20%;
+        margin: 0 calc(var(--global-stream-borderWidth) * 2);
+        padding: calc(var(--global-baseline)*0.8) calc(var(--global-baseline)*2.5);
+    }
+}
+
+/* photobooth */
 
 .c-pb-container {
     position: relative;
