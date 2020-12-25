@@ -11,28 +11,20 @@
     --global-color-alpha: #E8AE23;
     --global-color-alpha-hover: #e6d5ae;
     /* whitespace */
-    --global-font-size: 1rem;
+    --global-font-size: 0.7rem;
 
     --global-baseline: 6px;
     --global-whitespace: calc(var(--global-baseline) * 2);
-    /* = 24px */
-
     --global-whitespace-xs: calc(var(--global-baseline) * .5);
-    /* = 4px */
     --global-whitespace-sm: calc(var(--global-baseline) * 1);
-    /*  = 8px */
     --global-whitespace-md: calc(var(--global-baseline) * 2);
-    /*  = 16px */
     --global-whitespace-lg: calc(var(--global-baseline) * 4);
-    /*  = 32px */
     --global-whitespace-xl: calc(var(--global-whitespace) * 2);
-    /*  = 48px */
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3);
-    /*  = 72px */
 
     /* main */
     --global-background-color: #000;
-    --global-margin: 264px;
+    --global-margin: 48px;
     --global-width: calc(100vw - var(--global-margin)*2);
     --global-borderRadius: 5px;
 
@@ -40,7 +32,7 @@
 
 
     /* stream */
-    --global-stream-borderWidth: 3px;
+    --global-stream-borderWidth: 2px;
     --global-stream-width: calc(var(--global-width) - var(--global-stream-borderWidth)*2);
 
     /* overlay */
@@ -51,12 +43,12 @@
 
 
     /* icons */
-    --global-icon-width: calc(var(--global-baseline) * 6);
-    --global-icon-cam-width: calc(var(--global-baseline) * 6);
+    --global-icon-width: calc(var(--global-baseline) * 4);
+    --global-icon-cam-width: calc(var(--global-baseline) * 4);
     --global-icon-backgroundColor: var(--global-color-alpha);
     --global-icon-backgroundColor-hover: var(--global-color-alpha-hover);
 
-    --global-iconfield-width: calc(var(--global-baseline) * 10);
+    --global-iconfield-width: calc(var(--global-baseline) * 6);
 
     --global-icon-overlay-width: calc(var(--global-baseline) * 6);
 
@@ -76,6 +68,82 @@
 
     /* card */
     --card-backgroundColor: #FFF;
+
+    /* photowall */
+    --pw-image-height: 20vh;
+}
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    :root {
+        --global-stream-borderWidth: 3px;
+        --global-font-size: 1rem;
+        --global-margin: 264px;
+        --global-overlay-width: 1340px;
+        --global-icon-width: calc(var(--global-baseline) * 6);
+        --global-icon-cam-width: calc(var(--global-baseline) * 6);
+        --global-iconfield-width: calc(var(--global-baseline) * 10);
+        --pw-image-height: 50vh;
+
+    }
+}
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+    /* CSS */
+
+}
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* CSS */
+
+}
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+    /* CSS */
+
+}
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+    /* CSS */
+
+}
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+    /* CSS */
 
 }
 
@@ -97,7 +165,7 @@ html {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: url('../img/kronkel\ goud.png'); 
+    background: url('../img/kronkel\ goud.png');
     background-color: var(--global-background-color);
 
 }
@@ -507,8 +575,8 @@ input:disabled {
 }
 
 .c-icon-field--cam {
-    margin: 10px;
-    padding: 20px;
+    width: var(--global-iconfield-width);
+    height: var(--global-iconfield-width);
 }
 
 .c-icon-field--overlay {
@@ -627,6 +695,10 @@ input:disabled {
     flex-direction: row;
 }
 
+.c-pb__buttons {
+    width: 20%;
+}
+
 .c-pb__header--img-container {
     width: 70%;
     display: flex;
@@ -634,13 +706,13 @@ input:disabled {
     flex-direction: column;
 }
 
- .c-pb__header--img-title {
-    width: 80%;
+.c-pb__header--img-title {
+    width: 100%;
 }
 
 .c-pb__header--img-footer {
-    width: 80%;
-} 
+    width: 100%;
+}
 
 .c-pb__header-title {
     margin: var(--global-whitespace-md) !important;
@@ -654,9 +726,7 @@ input:disabled {
 */
 
 .c-pb__wall {
-    /* padding: var(--global-whitespace-md); */
     height: auto;
-    /* background-color: var(--global-backgroundColor); */
     border-radius: 5px;
     margin: var(--global-whitespace-lg) 0;
 }
@@ -668,7 +738,7 @@ input:disabled {
 
 .c-pb_wall--li {
     /* width: 30% !important; */
-    height: 50vh;
+    height: var(--pw-image-height);
     flex-grow: 1;
 }
 
@@ -762,7 +832,7 @@ input:disabled {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:0 0;
+    padding: 0 0;
     /* background-color: rgb(201, 169, 169); */
 }
 
@@ -776,7 +846,7 @@ input:disabled {
     width: 20%;
 }
 
-.c-hide-refresh .c-refresh-btn{
+.c-hide-refresh .c-refresh-btn {
     display: none;
 }
 
