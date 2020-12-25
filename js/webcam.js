@@ -18,15 +18,15 @@ const startWebcam = function () {
     webcam.start()
         .then(result => {
             console.log("webcam started");
+            webcamElement.addEventListener('playing', getVideoSize, false);
+            loadCameras();
+            listenToSnap();
         })
         .catch(err => {
             console.log(err);
         });
 
-    webcamElement.addEventListener('playing', getVideoSize, false);
 
-    loadCameras();
-    listenToSnap();
 }
 
 const getVideoSize = function () {
@@ -39,12 +39,13 @@ const getVideoSize = function () {
     canvasElement.style.height = videoHeight + "px";
 
     webcamElement.removeEventListener('playing', getVideoSize, false);
-};
+}
 
 const listenToCancel = function () {
     cancelCamButton.addEventListener('click', function () {
         resetCanvas();
         removeRefresh();
+        cameraSelection.innerHTML = '';
         webcamOverlay.classList.add('c-cam-overlay-hide')
         webcam.stop();
     })
@@ -102,17 +103,17 @@ const postPhoto = function (data) {
     var url = 'http://localhost:7071/api/krak/nye/live/photbooth/add';
     fetch(url, {
             method: 'POST',
-            body: data, 
+            body: data,
         }).then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
 }
 
-const addRefresh = function() {
+const addRefresh = function () {
     document.querySelector('.js-cam-buttons').classList.remove('c-hide-refresh');
     canvasRefreshButton = document.querySelector('.js-cam-refresh');
     canvasRefreshButton.addEventListener('click', resetCanvas);
 }
 
-const removeRefresh = function() {
+const removeRefresh = function () {
     document.querySelector('.js-cam-buttons').classList.add('c-hide-refresh');
 }
