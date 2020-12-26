@@ -23,7 +23,7 @@
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3);
 
     /* main */
-    --global-background-color: #000;
+    --global-background-color: rgb(117, 78, 78);
     --global-margin: 48px;
     --global-width: calc(100vw - var(--global-margin)*2);
     --global-borderRadius: 5px;

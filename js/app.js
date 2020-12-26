@@ -10,6 +10,7 @@ var webcamOverlay;
 
 const listenToLoadCam = function() {
     loadCamButton.addEventListener('click', function() {
+        // document.querySelector('.js-global-container').style.opacity = "80%"
         webcamOverlay.classList.remove('c-cam-overlay-hide')
         startWebcam();
     });
