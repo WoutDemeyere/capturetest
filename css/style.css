@@ -36,10 +36,11 @@
     --global-stream-width: calc(var(--global-width) - var(--global-stream-borderWidth)*2);
 
     /* overlay */
-    --global-overlay-width: 1340px;
+    --global-overlay-width: 640px;
     --global-overlay-padding: 15px;
     --global-overlay-cam-width: calc(var(--global-overlay-width) - var(--global-overlay-padding)*2);
     --global-overlay-left: 15%;
+    --global-overlay-backgroundColor: rgb(43, 42, 42);
 
 
     /* icons */
@@ -810,13 +811,10 @@ input:disabled {
 .c-cam-overlay {
     position: fixed;
     z-index: 10;
-    /* top: 5%; */
-    /* left: 50%; */
-    /* left: var(--global-overlay-left); */
     width: var(--global-overlay-width);
     height: calc((var(--global-overlay-width)*0.57) * 1.15);
     padding: var(--global-overlay-padding);
-    background-color: #fff;
+    background-color: var(--global-overlay-backgroundColor);
     border-radius: var(--global-borderRadius);
 }
 
@@ -825,40 +823,26 @@ input:disabled {
     pointer-events: none;
 }
 
-.c-cam-temp {
+/* .c-cam-temp {
     width: var(--global-overlay-cam-width);
     height: calc(var(--global-overlay-cam-width) * 0.57);
     background-color: #000;
     border-radius: var(--global-borderRadius);
     margin-bottom: var(--global-whitespace-md);
-}
-
-/* .c-video-container {
-   position: relative; 
 } */
-
-/* .c-video {
-    position: absolute; 
-    right: 0; 
-    top: 0;
-    width: 100%; 
-    height: 57%;
-    width: auto; 
-    height: auto; 
-    z-index: -100;
-    background-size: cover;
-    overflow: hidden;
-}  */
 
 .c-webcam-container {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    width: var(--global-overlay-cam-width);
+    /* width: 95%; */
 }
 
 .c-webcam {
-    width: var(--global-overlay-cam-width);
+    /* width: var(--global-overlay-cam-width); */
+    width: 100%;
     height: calc(var(--global-overlay-cam-width) * 0.57);
     border-radius: var(--global-borderRadius);
     margin-bottom: var(--global-whitespace-md);
