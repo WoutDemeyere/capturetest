@@ -18,13 +18,20 @@ const listenToLoadCam = function() {
 
 const listenToSubmit = function () {
     messageButton.addEventListener('click', function () {
-        var json = {
-            "name": "nothing",
-            "dialog": messageInput.value
-        };
-        console.log(json);
-        postMessage(json);
-        messageInput.value = "";
+        console.log(messageInput.value.length);
+        if(messageInput.value.length <= 40) {
+            var json = {
+                "name": "nothing",
+                "dialog": messageInput.value
+            };
+            console.log(json);
+            postMessage(json);
+            messageInput.value = "";
+            messageInput.classList.remove('c-input-has-error');
+        } else {
+            messageInput.classList.add('c-input-has-error');
+        }
+        
     });
 }
 
