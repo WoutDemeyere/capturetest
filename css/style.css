@@ -59,12 +59,14 @@
     --input-borderWidth: 1px;
     --input-borderColor: #888484;
     --input-backgroundColor: #FFFF;
+    --input-lineHeight: calc(var(--global-baseline) * 2);
 
     /* button */
     --button-borderRadius: 5px;
     --button-borderColor: #888484;
     --button-backgroundColor: var(--global-color-alpha);
     --button-backgroundColor-hover: var(--global-color-alpha-hover);
+    --button-font-size: calc(var(--global-font-size) * 1.5);
 
     /* card */
     --card-backgroundColor: #FFF;
@@ -81,7 +83,7 @@
 @media (min-width: 1281px) {
     :root {
         --global-stream-borderWidth: 3px;
-        --global-font-size: 1rem;
+        --global-font-size: 0.9rem;
         --global-margin: 264px;
         --global-overlay-width: 1340px;
         --global-icon-width: calc(var(--global-baseline) * 6);
@@ -96,9 +98,19 @@
     ##Screen = B/w 1025px to 1280px
   */
 
-@media (min-width: 1025px) and (max-width: 1280px) {
-
-    /* CSS */
+@media (min-width: 1025px) {
+    :root {
+        --global-stream-borderWidth: 3px;
+        --global-font-size: 0.9rem;
+        --button-font-size: calc(var(--global-font-size) * 1.5);
+        --global-margin: 160px;
+        --global-overlay-width: 1340px;
+        --global-icon-width: calc(var(--global-baseline) * 6);
+        --global-icon-cam-width: calc(var(--global-baseline) * 6);
+        --global-iconfield-width: calc(var(--global-baseline) * 10);
+        --pw-image-height: 40vh;
+        /* --input-lineHeight: calc(var(--global-baseline) * 4); */
+    }
 
 }
 
@@ -109,7 +121,9 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
-    /* CSS */
+    :root {
+        --global-margin: 80px;
+    }
 
 }
 
@@ -638,8 +652,8 @@ input:disabled {
     background-color: var(--input-backgroundColor);
     color: var(--global-input-color);
     font-weight: normal;
-    font-size: calc(var(--global-font-size) * 1.5);
-    line-height: calc(var(--global-baseline) * 2);
+    font-size: var(--button-font-size);
+    line-height: var(--input-lineHeight);
     /* margin-top: calc(var(--global-baseline) * 2); */
     padding: calc(var(--global-baseline)*0.8);
     outline: none;
@@ -676,11 +690,12 @@ input:disabled {
 
 @media (min-width: 768px) {
     .c-int-container {
-        height: 90px;
+        height: 90px !important;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        padding: 0;
     }
 
     .c-icons-container {
