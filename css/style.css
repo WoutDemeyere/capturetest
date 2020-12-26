@@ -36,7 +36,7 @@
     --global-stream-width: calc(var(--global-width) - var(--global-stream-borderWidth)*2);
 
     /* overlay */
-    --global-overlay-width: 640px;
+    --global-overlay-width: 360px;
     --global-overlay-padding: 15px;
     --global-overlay-cam-width: calc(var(--global-overlay-width) - var(--global-overlay-padding)*2);
     --global-overlay-left: 15%;
@@ -110,6 +110,7 @@
         --global-icon-cam-width: calc(var(--global-baseline) * 6);
         --global-iconfield-width: calc(var(--global-baseline) * 10);
         --pw-image-height: 40vh;
+        --global-overlay-width: 1280px;
         /* --input-lineHeight: calc(var(--global-baseline) * 4); */
     }
 
