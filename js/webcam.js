@@ -36,8 +36,8 @@ const getVideoSize = function () {
 
     root.style.setProperty('--global-overlay-width', videoWidth);
 
-    canvasElement.style.width = videoWidth + "px";
-    canvasElement.style.height = videoHeight + "px";
+    // canvasElement.style.width = videoWidth + "px";
+    // canvasElement.style.height = videoHeight + "px";
 
     webcamElement.removeEventListener('playing', getVideoSize, false);
 }

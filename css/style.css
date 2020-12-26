@@ -23,7 +23,7 @@
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3);
 
     /* main */
-    --global-background-color: rgb(117, 78, 78);
+    --global-background-color: #000;
     --global-margin: 48px;
     --global-width: calc(100vw - var(--global-margin)*2);
     --global-borderRadius: 5px;
@@ -525,7 +525,7 @@ input:disabled {
 
 .c-stream-container {
     margin-top: calc(var(--global-margin) / 4);
-    background-color: var(--global-card-backgroundColor);
+    /* backgr ound-color: var(--global-card-backgroundColor); */
     /* border-radius: var(--global-borderRadius); */
 
     display: flex;
@@ -851,7 +851,7 @@ input:disabled {
 
 .c-canvas {
     position: absolute;
-    width: var(--global-overlay-cam-width);
+    width: 100%;
     height: calc(var(--global-overlay-cam-width) * 0.57);
     border-radius: var(--global-borderRadius);
     margin-bottom: var(--global-whitespace-md);
