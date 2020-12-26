@@ -53,7 +53,7 @@
 
     --global-icon-overlay-width: calc(var(--global-baseline) * 6);
 
-    --global-icon-overlayCancel-width: calc(var(--global-baseline) * 3);
+    --global-icon-overlayCancel-width: calc(var(--global-baseline)*2);
 
     /* input */
     --input-borderRadius: 5px;
@@ -125,6 +125,7 @@
 
     :root {
         --global-margin: 80px;
+        --global-icon-overlayCancel-width: calc(var(--global-baseline) * 3);
     }
 
 }
@@ -596,17 +597,19 @@ input:disabled {
 }
 
 .c-icon-field--overlay {
-    padding: var(--global-whitespace-md);
+    width: var(--global-iconfield-width);
+    height: var(--global-iconfield-width);
 }
 
 .c-icon-field--overlay-cancel {
     background-color: red;
-    padding: var(--global-whitespace-md);
+    width: var(--global-iconfield-width);
+    height: var(--global-iconfield-width);
 }
 
 .c-icon-cam__overlay {
-    width: var(--global-icon-overlay-width);
-    height: var(--global-icon-overlay-width);
+    width: var(--global-icon-cam-width);
+    height: var(--global-icon-cam-width);
 }
 
 .c-icon-cam__overlay--cancel {
@@ -617,8 +620,15 @@ input:disabled {
 
 .c-icon-field--overlay-cancel {
     position: absolute;
-    right: -40px;
-    top: -25px;
+    right: -20px;
+    top: -15px;
+}
+
+@media (min-width: 768px) {
+    .c-icon-field--overlay-cancel{
+        right: -40px;
+        top: -25px;
+    }
 }
 
 .c-icon {
@@ -812,12 +822,15 @@ input:disabled {
 .c-cam-overlay {
     position: fixed;
     z-index: 10;
+    margin: 0 var(--global-whitespace-md);
     width: var(--global-overlay-width);
     height: calc((var(--global-overlay-width)*0.57) * 1.15);
     padding: var(--global-overlay-padding);
     background-color: var(--global-overlay-backgroundColor);
     border-radius: var(--global-borderRadius);
 }
+
+
 
 .c-cam-overlay-hide {
     display: none;
@@ -889,9 +902,9 @@ input:disabled {
     border: 1px solid var(--button-borderColor);
     background-color: var(--button-backgroundColor);
     /* color: #fff; */
-    padding: calc(var(--global-baseline)*3) calc(var(--global-baseline)*1.5);
+    padding: calc(var(--global-baseline)*2) calc(var(--global-baseline));
     line-height: calc(var(--global-baseline) * 2);
-    width: 20%;
+    width: 25%;
     /* margin: 0 calc(var(--global-stream-padding) * 1.2); */
     outline: none;
     /* box-shadow: var(--button-boxShadow, 0);
@@ -900,6 +913,19 @@ input:disabled {
 
 .c-send-button-cam:hover {
     background-color: var(--button-backgroundColor-hover);
+}
+
+@media (min-width: 768px) {
+    
+    .c-send-button-cam {
+        padding: calc(var(--global-baseline)*3) calc(var(--global-baseline)*1.5);
+        line-height: calc(var(--global-baseline) * 2);
+        width: 20%;
+    }
+
+    .c-cam-overlay {
+        margin: 0;
+    }
 }
 
 
