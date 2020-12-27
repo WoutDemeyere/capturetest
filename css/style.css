@@ -94,7 +94,7 @@
         --global-icon-width: calc(var(--global-baseline) * 6);
         --global-icon-cam-width: calc(var(--global-baseline) * 6);
         --global-iconfield-width: calc(var(--global-baseline) * 10);
-        --pw-image-height: 50vh;
+        --pw-image-height: 30vh;
     }
 }
 
@@ -113,7 +113,7 @@
         --global-icon-width: calc(var(--global-baseline) * 6);
         --global-icon-cam-width: calc(var(--global-baseline) * 6);
         --global-iconfield-width: calc(var(--global-baseline) * 10);
-        --pw-image-height: 40vh;
+        --pw-image-height: 30vh;
         --global-overlay-width: 1280px;
         /* --input-lineHeight: calc(var(--global-baseline) * 4); */
     }
@@ -702,8 +702,14 @@ input:disabled {
     margin: 0 calc(var(--global-whitespace-lg));
     outline: none;
     transition: var(--global-transition-button);
+    pointer-events: all;
     /* box-shadow: var(--button-boxShadow, 0);
     transition: all var(--global-transitionDuration-alpha) var(--global-transitionEasing-out); */
+}
+
+.c-button-off {
+    pointer-events: none;
+    background-color: var(--button-backgroundColor-hover);
 }
 
 .c-send-button:hover {

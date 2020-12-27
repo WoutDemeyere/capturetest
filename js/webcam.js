@@ -1,7 +1,8 @@
 var webCam, webcamList = [];
 
 var videoWidth, videoHeight;
-var snapButton, canvasRefreshButton;
+var snapButton, canvasRefreshButton, sendPhoto, photo;
+var camID;
 
 let root = document.documentElement;
 
@@ -9,11 +10,13 @@ const startWebcam = function () {
     cancelCamButton = document.querySelector('.js-cam-cancel');
     cameraSelection = document.querySelector('.js-cams');
     snapButton = document.querySelector('.js-snap');
+    sendPhoto = document.querySelector('.js-send-photo');
     listenToCancel();
 
     webcamElement = document.getElementById('webcam');
     canvasElement = document.getElementById('canvas');
     webcam = new Webcam(webcamElement, 'user', canvasElement, null);
+    webcam._selectedDeviceId = camID;
 
     webcam.start()
         .then(result => {
@@ -21,6 +24,7 @@ const startWebcam = function () {
             webcamElement.addEventListener('playing', getVideoSize, false);
             loadCameras();
             listenToSnap();
+            listenToSendPhoto();
         })
         .catch(err => {
             console.error(err);
@@ -42,14 +46,16 @@ const getVideoSize = function () {
     webcamElement.removeEventListener('playing', getVideoSize, false);
 }
 
+const stopOverlay = function () {
+    resetCanvas();
+    removeRefresh();
+    cameraSelection.innerHTML = '';
+    webcamOverlay.classList.add('c-cam-overlay-hide')
+    webcam.stop();
+}
+
 const listenToCancel = function () {
-    cancelCamButton.addEventListener('click', function () {
-        resetCanvas();
-        removeRefresh();
-        cameraSelection.innerHTML = '';
-        webcamOverlay.classList.add('c-cam-overlay-hide')
-        webcam.stop();
-    })
+    cancelCamButton.addEventListener('click', stopOverlay);
 }
 
 const resetCanvas = function () {
@@ -86,7 +92,7 @@ const loadOptions = function () {
 const listenToSelection = function () {
     cameraSelection.addEventListener('change', function () {
         webcam._selectedDeviceId = cameraSelection.value;
-        console.log(webcam._selectedDeviceId)
+        camID = cameraSelection.value;
         webcam.start();
         webcamElement.addEventListener('playing', getVideoSize, false);
     })
@@ -94,10 +100,16 @@ const listenToSelection = function () {
 
 const listenToSnap = function () {
     snapButton.addEventListener('click', function () {
-        var photo = webcam.snap();
-        postPhoto(photo);
+        photo = webcam.snap();
         addRefresh();
     })
+}
+
+const listenToSendPhoto = function () {
+    sendPhoto.addEventListener('click', function () {
+        postPhoto(photo)
+        stopOverlay();
+    });
 }
 
 const postPhoto = function (data) {

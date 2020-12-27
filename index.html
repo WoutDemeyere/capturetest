@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/webcam.js"></script>
 
@@ -475,7 +476,7 @@
 
                         <!-- <p class="c-pb__header-title">NYE PHOTOBOOTH</p> -->
                         <div class="c-pb__buttons">
-                            <button class="o-button-reset c-icon-field c-icon-field--cam">
+                            <button class="o-button-reset c-icon-field c-icon-field--cam js-refresh-pw">
                                 <svg class="c-icon-cam" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
                                     style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -586,13 +587,12 @@
                             </button>
                         </div>
 
-
                     </div>
 
                     <div class="c-pb__wall">
                         <div class="c-photos-container">
                             <ul class="o-list c-pb_wall--ul js-photo-wall">
-                                <li class="c-pb_wall--li">
+                                <!-- <li class="c-pb_wall--li">
                                     <img class="c-pb_wall--img"
                                         src="https://res.cloudinary.com/css-tricks/image/upload/f_auto,q_auto/v1568814785/photostream-photos/DSC05466_kwlv0n.jpg"
                                         alt="A Toyota Previa covered in graffiti" loading="lazy">
@@ -789,8 +789,7 @@
                                         alt="Jordan and Sarah looking at the menu in a coffee shop" loading="lazy">
                                 </li>
                                 <!--  Adding an empty <li> here so the final photo doesn't stretch like crazy. Try removing it and see what happens!  -->
-                                <li></li>
-
+                                <!-- <li></li>  -->
                             </ul>
                         </div>
                     </div>
@@ -976,7 +975,7 @@
                         </button>
                     </div>
 
-                    <button class="o-button-reset c-send-button-cam">SEND</button>
+                    <button class="o-button-reset c-send-button-cam js-send-photo">SEND</button>
 
                 </div>
             </div>
