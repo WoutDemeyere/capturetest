@@ -545,7 +545,7 @@ input:disabled {
 .c-stream__content {
     width: var(--global-stream-width);
     height: calc(var(--global-stream-width) * 0.57);
-    background-color: rgb(78, 76, 76);
+    /* background-color: rgb(78, 76, 76); */
     border-radius: var(--global-borderRadius);
 }
 

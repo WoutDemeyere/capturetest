@@ -10,6 +10,8 @@ var webcamOverlay;
 
 var ip;
 
+var player;
+
 const listenToLoadCam = function () {
     loadCamButton.addEventListener('click', function () {
         // document.querySelector('.js-global-container').style.opacity = "80%"
@@ -178,6 +180,25 @@ const getDOMElements = function () {
 
     webcamOverlay = document.querySelector('.js-overlay');
     refreshPhotowall = document.querySelector('.js-refresh-pw');
+
+    //streamContent = document.querySelector('.js-stream-content');
+}
+
+const loadStream = function() {
+    //var streamWidth = getComputedStyle(document.documentElement).getPropertyValue('--global-stream-width');
+    //console.log(streamWidth)
+    //var streamWidth = getComputedStyle(document.documentElement).getPropertyValue('--global-stream-width');
+    var options = {
+        height: '100%',
+        width: '100%',
+        channel: "JHkrak"
+        //width: 1280, 
+        
+        // only needed if your site is also embedded on embed.example.com and othersite.example.com
+        //parent: ["embed.example.com", "othersite.example.com"]
+      };
+      player = new Twitch.Player("js-stream-content", options);
+      player.setVolume(0.5);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -188,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(checkCookies, 2000);
     loadIp();
     getImages();
+    loadStream();
     listenToLoadCam();
     listenToIcons();
     listenToButtons();
