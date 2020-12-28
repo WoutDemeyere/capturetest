@@ -17,9 +17,12 @@
         var ua = navigator.userAgent;
       
         if (ua.indexOf("FBAN") != -1 || ua.indexOf("FBAV") != -1) {
+            alert('ting is faceook')
           if (!window.location.href.match('capturetest')) {
             window.location.href = "https://www.woutdemeyere.github.io/capturetest/";
           }
+        } else {
+            alert('ting is noooot faceook')
         }
       
       </script>
