@@ -1,16 +1,43 @@
 var webCam, webcamList = [];
 
 var videoWidth, videoHeight;
-var snapButton, canvasRefreshButton, sendPhoto, photo;
+var snapButton, canvasRefreshButton, sendPhoto, photo, cameraRotate;
 var camID;
 
 let root = document.documentElement;
 
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
 const startWebcam = function () {
-    cancelCamButton = document.querySelector('.js-cam-cancel');
+
     cameraSelection = document.querySelector('.js-cams');
+    cameraRotate = document.querySelector('.js-rotate');
+
+    isMobile.any()?(cameraSelection.classList.add('c-hide-option'),cameraRotate.classList.remove('c-hide-option')):(cameraSelection.classList.remove('c-hide-option'),cameraRotate.classList.add('c-hide-option')); 
+
+    cancelCamButton = document.querySelector('.js-cam-cancel');
     snapButton = document.querySelector('.js-snap');
     sendPhoto = document.querySelector('.js-send-photo');
+
     listenToCancel();
 
     webcamElement = document.getElementById('webcam');
@@ -22,7 +49,7 @@ const startWebcam = function () {
         .then(result => {
             console.log("webcam started");
             webcamElement.addEventListener('playing', getVideoSize, false);
-            loadCameras();
+            isMobile.any()?loadCamerasMobile():loadCamerasDesktop();    
             listenToSnap();
             listenToSendPhoto();
         })
@@ -63,7 +90,11 @@ const resetCanvas = function () {
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
 }
 
-const loadCameras = function () {
+const loadCamerasMobile = function() {
+    cameraRotate.addEventListener('click', webcam.flip());
+}
+
+const loadCamerasDesktop = function () {
     navigator.mediaDevices.enumerateDevices()
         .then(getVideoInputs)
         .catch((err) => console.error("An error occurd", err));
@@ -107,6 +138,11 @@ const listenToSnap = function () {
 
 const listenToSendPhoto = function () {
     sendPhoto.addEventListener('click', function () {
+        // console.log(photo.toString())
+        // var json = {
+        //     "ip": ip,
+        //     "base64": photo
+        // };
         postPhoto(photo)
         stopOverlay();
     });
@@ -114,6 +150,7 @@ const listenToSendPhoto = function () {
 
 const postPhoto = function (data) {
     var url = 'http://localhost:7071/api/krak/nye/live/photbooth/add';
+    console.log(data)
     fetch(url, {
             method: 'POST',
             body: data,

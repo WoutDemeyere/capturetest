@@ -46,10 +46,10 @@ const listenToSubmit = function () {
     Cookies.set('submit', 'digeriedoo', {
         expires: inFifteenMinutes
     });
-    messageButton.classList.add('c-button-off');
+    //messageButton.classList.add('c-button-off');
     if (messageInput.value.length <= 40 && !messageInput.value.isEmpty()) {
         var json = {
-            "ip": ip,
+            "ip": "192.168.0.101",
             "dialog": messageInput.value
         };
         console.log(json);
@@ -62,7 +62,7 @@ const listenToSubmit = function () {
 }
 
 const checkCookies = function () {
-    Cookies.get('submit') != undefined ? (messageButton.classList.add('c-button-off'), messageButton.removeEventListener('click', listenToSubmit)) : (messageButton.classList.remove('c-button-off'), messageButton.addEventListener('click', listenToSubmit));
+    //Cookies.get('submit') != undefined ? (messageButton.classList.add('c-button-off'), messageButton.removeEventListener('click', listenToSubmit)) : (messageButton.classList.remove('c-button-off'), messageButton.addEventListener('click', listenToSubmit));
     Cookies.get('firework') != undefined ? (fireworkButton.classList.add('c-button-off'), fireworkButton.removeEventListener('click', sendFireworks)) : (fireworkButton.classList.remove('c-button-off'), fireworkButton.addEventListener('click', sendFireworks));
 }
 

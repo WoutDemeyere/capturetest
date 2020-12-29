@@ -53,7 +53,8 @@
 
     --global-icon-overlay-width: calc(var(--global-baseline) * 6);
 
-    --global-icon-overlayCancel-width: calc(var(--global-baseline)*2);
+    --global-iconfieldCancel-width: calc(var(--global-baseline) * 5);
+    --global-icon-overlayCancel-width: calc(var(--global-baseline) * 2);
 
     /* input */
     --input-borderRadius: 5px;
@@ -73,7 +74,7 @@
     --card-backgroundColor: #FFF;
 
     /* photowall */
-    --pw-image-height: 20vh;
+    --pw-image-height: 15vh;
 
     /* transitions */
     --global-transition-icons: 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -94,6 +95,9 @@
         --global-icon-width: calc(var(--global-baseline) * 6);
         --global-icon-cam-width: calc(var(--global-baseline) * 6);
         --global-iconfield-width: calc(var(--global-baseline) * 10);
+        --global-iconfieldCancel-width: calc(var(--global-baseline) * 8);
+        --global-icon-overlayCancel-width: calc(var(--global-baseline) * 2);
+
         --pw-image-height: 30vh;
     }
 }
@@ -103,18 +107,20 @@
     ##Screen = B/w 1025px to 1280px
   */
 
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and  (max-width: 1280px){
     :root {
         --global-stream-borderWidth: 3px;
         --global-font-size: 0.9rem;
         --button-font-size: calc(var(--global-font-size) * 1.5);
         --global-margin: 230px;
         --global-overlay-width: 1340px;
-        --global-icon-width: calc(var(--global-baseline) * 6);
+        --global-icon-width: calc(var(--global-baseline) * 4);
         --global-icon-cam-width: calc(var(--global-baseline) * 6);
-        --global-iconfield-width: calc(var(--global-baseline) * 10);
-        --pw-image-height: 30vh;
+        --global-iconfield-width: calc(var(--global-baseline) * 8);
+        --pw-image-height: 20vh;
         --global-overlay-width: 1280px;
+        --global-iconfieldCancel-width: calc(var(--global-baseline) * 8);
+        --global-icon-overlayCancel-width: calc(var(--global-baseline) * 2);
         /* --input-lineHeight: calc(var(--global-baseline) * 4); */
     }
 
@@ -129,7 +135,11 @@
 
     :root {
         --global-margin: 80px;
-        --global-icon-overlayCancel-width: calc(var(--global-baseline) * 3);
+        --global-icon-width: calc(var(--global-baseline) * 4);
+        --global-iconfield-width: calc(var(--global-baseline) * 8);
+        --pw-image-height: 20vh;
+        --global-iconfieldCancel-width: calc(var(--global-baseline) * 7);
+        --global-icon-overlayCancel-width: calc(var(--global-baseline) * 2);
     }
 
 }
@@ -549,6 +559,13 @@ input:disabled {
     border-radius: var(--global-borderRadius);
 }
 
+.c-stream__content-timer {
+    width: var(--global-stream-width);
+    height: calc(var(--global-stream-width) * 0.57);
+    background-color: rgb(78, 76, 76);
+    border-radius: var(--global-borderRadius);
+}
+
 
 
 .c-int-container {
@@ -608,8 +625,8 @@ input:disabled {
 
 .c-icon-field--overlay-cancel {
     background-color: red;
-    width: var(--global-iconfield-width);
-    height: var(--global-iconfield-width);
+    width: var(--global-iconfieldCancel-width);
+    height: var(--global-iconfieldCancel-width);
 }
 
 .c-icon-cam__overlay {
@@ -629,9 +646,21 @@ input:disabled {
     top: -15px;
 }
 
+.c-hide-option {
+    display: none;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .c-icon-field--overlay-cancel{
+        right: -30px;
+        top: -25px;
+    }
+}
+
 @media (min-width: 768px) {
     .c-icon-field--overlay-cancel{
-        right: -40px;
+        right: -30px;
         top: -25px;
     }
 }
@@ -723,11 +752,12 @@ input:disabled {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
         padding: 0;
     }
 
     .c-icons-container {
+        width: 40%;
         justify-content: space-around;
         align-items: center;
     }
@@ -839,7 +869,7 @@ input:disabled {
 .c-cam-overlay {
     position: fixed;
     z-index: 10;
-    margin: 0 var(--global-whitespace-md);
+    margin: 0 var(--global-whitespace-lg);
     width: var(--global-overlay-width);
     height: calc((var(--global-overlay-width)*0.57) * 1.15);
     padding: var(--global-overlay-padding);
