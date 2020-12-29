@@ -91,7 +91,10 @@ const resetCanvas = function () {
 }
 
 const loadCamerasMobile = function() {
-    cameraRotate.addEventListener('click', webcam.flip());
+    cameraRotate.addEventListener('click', function() {
+        webcam.flip();
+        webcam.start();
+    });
 }
 
 const loadCamerasDesktop = function () {
