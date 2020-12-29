@@ -203,6 +203,19 @@ const loadStream = function() {
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Script loaded!');
+
+    var ua = navigator.userAgent;
+
+        if (ua.indexOf("FBAN") != -1 || ua.indexOf("FBAV") != -1) {
+            //alert('ting is faceookkkkkk')
+            if (!window.location.href.match('capturetest')) {
+                //alert('redericting init')
+                window.location.href = "https://www.woutdemeyere.github.io/capturetest/";
+            }
+        } else {
+            //alert('ting is noooot faceook')
+        }
+        
     getDOMElements();
     //cookieTest();
     checkCookies();

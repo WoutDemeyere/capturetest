@@ -1,7 +1,17 @@
 /*------------------------------------*\
 #FONTS
 \*------------------------------------*/
-
+@font-face {
+    font-family: 'Bozar PM';
+    src: url('../fonts/BozarPM-Light.eot');
+    src: url('../fonts/BozarPM-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/BozarPM-Light.woff2') format('woff2'),
+        url('../fonts/BozarPM-Light.woff') format('woff'),
+        url('../fonts/BozarPM-Light.svg#BozarPM-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
 /*------------------------------------*\
 #Variables
 \*------------------------------------*/
@@ -188,9 +198,9 @@
 */
 
 html {
-    font-size: 16px;
+    font-size: var(--global-font-size);
     line-height: 1.5;
-    font-family: sans-serif;
+    font-family: 'Bozar PM', sans-serif;
     color: Black;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
@@ -688,6 +698,7 @@ input:disabled {
 }
 
 .c-input {
+    font-family: 'Bozar PM', sans-serif;
     --input-transition: all var(--global-transitionDuration-alpha) var(--global-transitionEasing-out);
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -707,6 +718,7 @@ input:disabled {
 }
 
 .c-input-has-error {
+    
     border-color: crimson;
     border-width: 2px;
 }
