@@ -10,7 +10,7 @@ var webcamOverlay;
 
 var ip;
 
-var player;
+var player, sleepTime;
 
 const listenToLoadCam = function () {
     loadCamButton.addEventListener('click', function () {
@@ -41,15 +41,22 @@ const listenToButtons = function () {
 
 const listenToSubmit = function () {
     console.log('SUBMIT CLICKED');
-    var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
-    console.log(`TIS SET for ${inFifteenMinutes}`)
+    sleepTimeCET = new Date(new Date().getTime() + 1 * 60 * 1000);
+    sleepTimeMillies = new Date().getTime() + 1 * 60 * 1000;
+
+    console.log(`TIS SET for ${sleepTime}`)
+
     Cookies.set('submit', 'digeriedoo', {
-        expires: inFifteenMinutes
+        expires: sleepTimeCET
     });
-    //messageButton.classList.add('c-button-off');
-    if (messageInput.value.length <= 40 && !messageInput.value.isEmpty()) {
+
+    Cookies.set('submit_timeout', sleepTimeMillies, {
+        expires: sleepTimeCET
+    });
+    messageButton.classList.add('c-button-off');
+    if (messageInput.value.length <= 60 && !messageInput.value.isEmpty()) {
         var json = {
-            "ip": "192.168.0.101",
+            "ip": ip,
             "dialog": messageInput.value
         };
         console.log(json);
@@ -62,8 +69,26 @@ const listenToSubmit = function () {
 }
 
 const checkCookies = function () {
-    //Cookies.get('submit') != undefined ? (messageButton.classList.add('c-button-off'), messageButton.removeEventListener('click', listenToSubmit)) : (messageButton.classList.remove('c-button-off'), messageButton.addEventListener('click', listenToSubmit));
+    Cookies.get('submit') != undefined ? (messageButton.classList.add('c-button-off'), messageButton.removeEventListener('click', listenToSubmit), addTimerMessageButton()) : (messageButton.classList.remove('c-button-off'), messageButton.addEventListener('click', listenToSubmit));
     Cookies.get('firework') != undefined ? (fireworkButton.classList.add('c-button-off'), fireworkButton.removeEventListener('click', sendFireworks)) : (fireworkButton.classList.remove('c-button-off'), fireworkButton.addEventListener('click', sendFireworks));
+
+}
+
+const addTimerMessageButton = function () {
+    var x = setInterval(function () {
+        var now = new Date().getTime()
+        var distance = sleepTimeMillies - now;
+
+        console.log(`Now: ${now} Sleeptime: ${sleepTimeMillies} Dif: ${distance}`)
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        messageButton.innerHTML = seconds;
+
+        if (distance < 0) {
+            clearInterval(x);
+            messageButton.innerHTML = "SEND";
+        }
+    }, 1000);
 }
 
 const cookieTest = function () {
@@ -123,7 +148,7 @@ const sendWine = async () => {
     console.log(wine);
 }
 
-const sendFireworks = async () => {  
+const sendFireworks = async () => {
     var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
     console.log(`TIS SET for ${inFifteenMinutes}`)
     Cookies.set('firework', 'digeriedoo', {
@@ -184,7 +209,7 @@ const getDOMElements = function () {
     //streamContent = document.querySelector('.js-stream-content');
 }
 
-const loadStream = function() {
+const loadStream = function () {
     //var streamWidth = getComputedStyle(document.documentElement).getPropertyValue('--global-stream-width');
     //console.log(streamWidth)
     //var streamWidth = getComputedStyle(document.documentElement).getPropertyValue('--global-stream-width');
@@ -193,29 +218,45 @@ const loadStream = function() {
         width: '100%',
         channel: "JHkrak"
         //width: 1280, 
-        
+
         // only needed if your site is also embedded on embed.example.com and othersite.example.com
         //parent: ["embed.example.com", "othersite.example.com"]
-      };
-      player = new Twitch.Player("js-stream-content", options);
-      player.setVolume(0.5);
+    };
+    player = new Twitch.Player("js-stream-content", options);
+    //player.setVolume(0.5);
+}
+
+const checkIE = function() {
+    var isIE = false;
+    var ua = window.navigator.userAgent;
+    var old_ie = ua.indexOf('MSIE ');
+    var new_ie = ua.indexOf('Trident/');
+
+    if ((old_ie > -1) || (new_ie > -1)) {
+        isIE = true;
+    }
+
+    // if (isIE) {
+    //     alert('You are using an outdatet browser, please switch to firefox or chrome to take full advantage of the site!')
+    // }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Script loaded!');
 
-    var ua = navigator.userAgent;
+    // if (ua.indexOf("FBAN") != -1 || ua.indexOf("FBAV") != -1) {
+    //     //alert('ting is faceookkkkkk')
+    //     if (!window.location.href.match('capturetest')) {
+    //         //alert('redericting init')
+    //         window.location.href = "https://www.woutdemeyere.github.io/capturetest/";
+    //     }
+    // } else if(ua.indexOf("MSIE ")){
+    //     alert('You are using an outdatet browser, please switch to firefox or chrome to take full advantage of the site!')
+    // }
 
-        if (ua.indexOf("FBAN") != -1 || ua.indexOf("FBAV") != -1) {
-            //alert('ting is faceookkkkkk')
-            if (!window.location.href.match('capturetest')) {
-                //alert('redericting init')
-                window.location.href = "https://www.woutdemeyere.github.io/capturetest/";
-            }
-        } else {
-            //alert('ting is noooot faceook')
-        }
-        
+    sleepTimeMillies = Cookies.get('submit_timeout');
+
+    //checkIE();
     getDOMElements();
     //cookieTest();
     checkCookies();
