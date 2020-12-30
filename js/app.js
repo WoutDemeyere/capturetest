@@ -101,7 +101,7 @@ const cookieTest = function () {
 }
 
 const postMessage = function (data) {
-    var url = 'http://localhost:7071/api/krak/nye/live/messages';
+    var url = 'https://kraknye2021.azurewebsites.net/api/krak/nye/live/messages';
 
     fetch(url, {
             method: 'POST', // or 'PUT'
@@ -123,7 +123,7 @@ const listenToIcons = function () {
 
 const sendBeer = async () => {
     const beer = await fetch(
-            ` http://localhost:7071/api/krak/nye/live/icons/beer`
+            `https://kraknye2021.azurewebsites.net/api/krak/nye/live/icons/beer`
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
@@ -132,7 +132,7 @@ const sendBeer = async () => {
 
 const sendCava = async () => {
     const cava = await fetch(
-            ` http://localhost:7071/api/krak/nye/live/icons/cava`
+            `https://kraknye2021.azurewebsites.net/api/krak/nye/live/icons/cava`
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
@@ -141,7 +141,7 @@ const sendCava = async () => {
 
 const sendWine = async () => {
     const wine = await fetch(
-            ` http://localhost:7071/api/krak/nye/live/icons/wine`
+            `https://kraknye2021.azurewebsites.net/api/krak/nye/live/icons/wine`
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
@@ -156,7 +156,7 @@ const sendFireworks = async () => {
     });
     fireworkButton.classList.add('c-button-off');
     const firework = await fetch(
-            ` http://localhost:7071/api/krak/nye/live/icons/firework`
+            `https://kraknye2021.azurewebsites.net/api/krak/nye/live/icons/firework`
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
@@ -170,7 +170,7 @@ const listenToRefresh = function () {
 const getImages = async () => {
     var data = [];
     data = await fetch(
-            `http://localhost:7071/api/krak/nye/live/photbooth/photos`
+            `https://kraknye2021photobooth.azurewebsites.net/api/krak/nye/live/photbooth/photos`
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));

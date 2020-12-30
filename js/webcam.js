@@ -142,21 +142,21 @@ const listenToSnap = function () {
 const listenToSendPhoto = function () {
     sendPhoto.addEventListener('click', function () {
         // console.log(photo.toString())
-        // var json = {
-        //     "ip": ip,
-        //     "base64": photo
-        // };
-        postPhoto(photo)
+        var json = {
+            "ip": ip,
+            "base64": photo
+        };
+        postPhoto(json)
         stopOverlay();
     });
 }
 
 const postPhoto = function (data) {
-    var url = 'http://localhost:7071/api/krak/nye/live/photbooth/add';
+    var url = 'https://kraknye2021photobooth.azurewebsites.net/api/krak/nye/live/photbooth/add';
     console.log(data)
     fetch(url, {
             method: 'POST',
-            body: data,
+            body: JSON.stringify(data),
         }).then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
 }
