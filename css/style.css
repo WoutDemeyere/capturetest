@@ -624,7 +624,8 @@ input:disabled {
     height: var(--global-iconfield-width);
 }
 
-.c-icon-field:hover {
+.c-icon-field:hover,
+.c-icon-field:active {
     background-color: var(--global-icon-backgroundColor-hover);
 }
 
