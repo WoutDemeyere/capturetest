@@ -106,7 +106,7 @@
         --global-font-size: 0.9rem;
         --global-margin: 264px;
         --global-overlay-width: 1340px;
-        --global-icon-width: calc(var(--global-baseline) * 6);
+        --global-icon-width: calc(var(--global-baseline) * 7);
         --global-icon-cam-width: calc(var(--global-baseline) * 5);
         --global-iconfield-width: calc(var(--global-baseline) * 10);
         --global-iconfieldCancel-width: calc(var(--global-baseline) * 8);
@@ -620,7 +620,6 @@ input:disabled {
 
 .c-icon-field:focus {
     outline:0;
-    border: 3px solid 
 }
 
 .c-icon-field--int {
@@ -632,6 +631,16 @@ input:disabled {
     .c-icon-field:hover {
         background-color: var(--global-icon-backgroundColor-hover);
     }
+
+    .c-icon-field:hover .c-icon {
+        width: var(--global-icon-width);
+        height: var(--global-icon-width);
+    } 
+    
+    .c-icon-field:hover .c-icon-cam {
+        width: var(--global-icon-cam-width);
+        height: var(--global-icon-cam-width);
+    }
   }
 
 .c-icon-field:active {
@@ -641,8 +650,16 @@ input:disabled {
 
 .c-icon-field--cam {
     margin: 3px;
-    width: var(--global-iconfield-width);
-    height: var(--global-iconfield-width);
+    width: calc(var(--global-iconfield-width)*0.8);
+    height: calc(var(--global-iconfield-width)*0.8);
+}
+
+@media (min-width: 768px) {
+    .c-icon-field--cam {
+        margin: 3px;
+        width: var(--global-iconfield-width);
+        height: var(--global-iconfield-width);
+    }
 }
 
 .c-icon-field--overlay {
@@ -698,20 +715,17 @@ input:disabled {
 }
 
 .c-icon-cam {
-    width: calc(var(--global-icon-cam-width)*0.9);
-    height: calc(var(--global-icon-cam-width)*0.9);
+    width: calc(var(--global-icon-cam-width)*0.7);
+    height: calc(var(--global-icon-cam-width)*0.7);
 }
 
-
-.c-icon-field:hover .c-icon {
-    width: var(--global-icon-width);
-    height: var(--global-icon-width);
-} 
-
-.c-icon-field:hover .c-icon-cam {
-    width: var(--global-icon-cam-width);
-    height: var(--global-icon-cam-width);
+@media (min-width: 768px) {
+    .c-icon-cam {
+        width: calc(var(--global-icon-cam-width)*0.9);
+        height: calc(var(--global-icon-cam-width)*0.9);
+    }
 }
+
 
 .c-icon-refresh:hover {
     transform: rotateZ(35deg);

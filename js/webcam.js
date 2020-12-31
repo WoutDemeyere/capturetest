@@ -47,7 +47,7 @@ const startWebcam = function () {
 
     webcam.start()
         .then(result => {
-            console.log("webcam started");
+            //console.log("webcam started");
             webcamElement.addEventListener('playing', getVideoSize, false);
             isMobile.any()?loadCamerasMobile():loadCamerasDesktop();    
             listenToSnap();
@@ -108,7 +108,7 @@ const loadCamerasDesktop = function () {
                 webcamList.push(mediaDevice);
             }
         });
-        console.log(webcamList)
+        //console.log(webcamList)
         loadOptions();
     }
 }
@@ -153,7 +153,7 @@ const listenToSendPhoto = function () {
 
 const postPhoto = function (data) {
     var url = 'https://kraknye2021photobooth.azurewebsites.net/api/krak/nye/live/photbooth/add';
-    console.log(data)
+    //(data)
     fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),

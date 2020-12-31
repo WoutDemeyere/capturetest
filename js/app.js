@@ -10,11 +10,17 @@ var webcamOverlay;
 
 var ip;
 
-var player, sleepTime;
+var player, sleepTime, sleepTimeFireworks;
 
 const listenToLoadCam = function () {
     loadCamButton.addEventListener('click', function () {
         // document.querySelector('.js-global-container').style.opacity = "80%"
+        
+        var ua = window.navigator.userAgent;
+        if (ua.indexOf("FBAN") != -1 || ua.indexOf("FBAV") != -1) {
+            alert('Please use another browser like chrome or safari to take full advantage of the photobooth')
+        }
+
         webcamOverlay.classList.remove('c-cam-overlay-hide')
         startWebcam();
     });
@@ -44,7 +50,7 @@ const listenToSubmit = function () {
     sleepTimeCET = new Date(new Date().getTime() + 1 * 60 * 1000);
     sleepTimeMillies = new Date().getTime() + 1 * 60 * 1000;
 
-    console.log(`TIS SET for ${sleepTime}`)
+    //console.log(`TIS SET for ${sleepTime}`)
 
     Cookies.set('submit', 'digeriedoo', {
         expires: sleepTimeCET
@@ -59,7 +65,7 @@ const listenToSubmit = function () {
             "ip": ip,
             "dialog": messageInput.value
         };
-        console.log(json);
+        //console.log(json);
         postMessage(json);
         messageInput.value = "";
         messageInput.classList.remove('c-input-has-error');
@@ -70,8 +76,7 @@ const listenToSubmit = function () {
 
 const checkCookies = function () {
     Cookies.get('submit') != undefined ? (messageButton.classList.add('c-button-off'), messageButton.removeEventListener('click', listenToSubmit), addTimerMessageButton()) : (messageButton.classList.remove('c-button-off'), messageButton.addEventListener('click', listenToSubmit));
-    Cookies.get('firework') != undefined ? (fireworkButton.classList.add('c-button-off'), fireworkButton.removeEventListener('click', sendFireworks)) : (fireworkButton.classList.remove('c-button-off'), fireworkButton.addEventListener('click', sendFireworks));
-
+    Cookies.get('firework') != undefined ? (fireworkButton.classList.add('c-button-off'), fireworkButton.removeEventListener('click', sendFireworks), addTimerFireworkButton()) : (fireworkButton.classList.remove('c-button-off'), fireworkButton.addEventListener('click', sendFireworks));
 }
 
 const addTimerMessageButton = function () {
@@ -79,7 +84,7 @@ const addTimerMessageButton = function () {
         var now = new Date().getTime()
         var distance = sleepTimeMillies - now;
 
-        console.log(`Now: ${now} Sleeptime: ${sleepTimeMillies} Dif: ${distance}`)
+        //(`Now: ${now} Sleeptime: ${sleepTimeMillies} Dif: ${distance}`)
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         messageButton.innerHTML = seconds;
@@ -91,9 +96,26 @@ const addTimerMessageButton = function () {
     }, 1000);
 }
 
+const addTimerFireworkButton = function() {
+    var x = setInterval(function () {
+        var now = new Date().getTime()
+        var distance = sleepTimeFireworks - now;
+
+        console.log(`Now: ${now} Sleeptime: ${sleepTimeFireworks} Dif: ${distance}`)
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        fireworkButton.innerHTML = seconds;
+
+        if (distance < 0) {
+            clearInterval(x);
+            fireworkButton.innerHTML = fireworkSVG;
+        }
+    }, 1000);
+}
+
 const cookieTest = function () {
     var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
-    console.log(`TIS SET for ${inFifteenMinutes}`)
+    //console.log(`TIS SET for ${inFifteenMinutes}`)
 
     Cookies.set('firework', 'false', {
         expires: inFifteenMinutes
@@ -127,7 +149,7 @@ const sendBeer = async () => {
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
-    console.log(beer);
+    //console.log(beer);
 }
 
 const sendCava = async () => {
@@ -136,7 +158,7 @@ const sendCava = async () => {
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
-    console.log(cava);
+    //console.log(cava);
 }
 
 const sendWine = async () => {
@@ -145,22 +167,33 @@ const sendWine = async () => {
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
-    console.log(wine);
+    //console.log(wine);
 }
 
 const sendFireworks = async () => {
-    var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
-    console.log(`TIS SET for ${inFifteenMinutes}`)
+   //var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
+    
+
+    var sleepTimeCETf = new Date(new Date().getTime() + 1 * 60 * 1000);
+    sleepTimeFireworks = new Date().getTime() + 1 * 60 * 1000;
+
+    console.log(`TIS SET for ${sleepTimeFireworks}`)
     Cookies.set('firework', 'digeriedoo', {
-        expires: inFifteenMinutes
+        expires: sleepTimeCETf
     });
+
+    Cookies.set('firework_timeout', sleepTimeFireworks, {
+        expires: sleepTimeCETf
+    });
+
+
     fireworkButton.classList.add('c-button-off');
     const firework = await fetch(
             `https://kraknye2021.azurewebsites.net/api/krak/nye/live/icons/firework`
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
-    console.log(firework);
+    //console.log(firework);
 }
 
 const listenToRefresh = function () {
@@ -174,8 +207,8 @@ const getImages = async () => {
         )
         .then((r) => r.json())
         .catch((err) => console.error("An error occurd", err));
-    console.log('HELLLOOO');
-    console.log(data);
+    //console.log('HELLLOOO');
+    //console.log(data);
     fillImages(data)
 };
 
@@ -244,6 +277,10 @@ const checkIE = function() {
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Script loaded!');
 
+    if (location.protocol !== "https:") {
+        location.protocol = "https:";
+    }
+
     // if (ua.indexOf("FBAN") != -1 || ua.indexOf("FBAV") != -1) {
     //     //alert('ting is faceookkkkkk')
     //     if (!window.location.href.match('capturetest')) {
@@ -255,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // }
 
     sleepTimeMillies = Cookies.get('submit_timeout');
+    sleepTimeFireworks = Cookies.get('firework_timeout');
 
     //checkIE();
     getDOMElements();
